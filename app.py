@@ -751,7 +751,7 @@ def show_page_3():
             # Create a line plot using Plotly Express
             fig1 = px.line(temp2, x='season', y=['Wickets taken', 'Bowling average', 'Economy rate'],
                           labels={'season': 'Season', 'value': 'value', 'variable': 'Metric'},
-                          title=f'Season-wise Bowling Performance of a {selected_player} ({temp_seasonal_performance['season'].min()}-{temp_seasonal_performance['season'].max()})',
+                          title=f"Season-wise Bowling Performance of a {selected_player} ({temp_seasonal_performance['season'].min()}-{temp_seasonal_performance['season'].max()})",
                           width=800, height=600)
 
             # Customize the plot appearance
