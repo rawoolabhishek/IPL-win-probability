@@ -745,7 +745,7 @@ def show_page_3():
         if a.empty:
             st.write('Did Not Bowl')
         else:
-            meaning1 = (f'Bowling average :- It shows how many runs a bowler gives up on average to take one wicket.<br>'
+            meaning1 = (f'Bowling average :- How many runs a bowler gives up on average to take one wicket.<br>'
                      f'Economy rate :- How many runs a bowler concedes on average per over')
             st.write(meaning1, unsafe_allow_html=True)
             # Create a line plot using Plotly Express
@@ -894,7 +894,8 @@ def show_page_4():
                                          name=f'{selected_team2}'))
 
                 # Update layout
-                fig.update_layout(title='Runs scored Comparison',
+                fig.update_layout(title=F"Runs scored Comparison<br>"
+                                        f"Click or hover on line to see info.",
                                   xaxis_title='Index',
                                   yaxis_title='Runs')
 
@@ -1205,6 +1206,37 @@ def show_page_5():
     ax.set_xticklabels(xticks_labels, rotation=0, ha='center')
     st.pyplot(plt)
 
+
+    # Assuming you have already calculated temp_runs dataframe
+    temp_wickets = merged_df[(merged_df['bowling_team'].isin(['Royal Challengers Bangalore',
+                                                              'Punjab Kings', 'Mumbai Indians', 'Kolkata Knight Riders',
+                                                              'Rajasthan Royals',
+                                                              'Chennai Super Kings', 'Sunrisers Hyderabad',
+                                                              'Delhi Capitals',
+                                                              'Lucknow Super Giants', 'Gujarat Titans']))].groupby(
+        ['bowling_team'])['is_wicket'].sum().reset_index(name='Wickets')
+
+    # Define the colors for each team
+    colors1 = {
+        'Chennai Super Kings': 'yellow',
+        'Delhi Capitals': 'dodgerblue',
+        'Gujarat Titans': 'navy',
+        'Kolkata Knight Riders': 'purple',
+        'Lucknow Super Giants': 'lightblue',
+        'Mumbai Indians': 'blue',
+        'Punjab Kings': 'lightcoral',
+        'Rajasthan Royals': 'pink',
+        'Royal Challengers Bangalore': 'red',
+        'Sunrisers Hyderabad': 'orange'
+    }
+
+    plt.rcParams['figure.figsize'] = (12, 6)
+    ax = temp_wickets.plot(kind='bar', x='bowling_team', y='Wickets', color=temp_wickets['bowling_team'].map(colors1))
+    plt.title('Total Wickets taken by each Team in IPL')
+    plt.xlabel('Teams', weight='bold', size=12)
+    xticks_labels = ['\n'.join(label.split()) for label in temp_wickets['bowling_team'].values]
+    ax.set_xticklabels(xticks_labels, rotation=0, ha='center')
+    st.pyplot(plt)
 
     # boundary distribution all seasons
 
@@ -2103,7 +2135,7 @@ def add_name_to_header(name):
             position: absolute;
             top: 10px;
             right: 10px;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
             color: #848587;
         }}
