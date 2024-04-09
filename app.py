@@ -654,7 +654,7 @@ def show_page_3():
             st.subheader('General Statistics')
             st.markdown(f"*Total Matches Played in Season:* {bowler_total_match_in_season}")
             st.markdown(f"*Total Wickets Taken in Season:* {total_wickets_in_season}")
-            if bowling_avg_in_season > 0:
+            if total_wickets_in_season > 0:
                 st.markdown(f"*Bowling Average in Season:* {bowling_avg_in_season}")
             if economy_in_season > 0:
                 st.markdown(f"*Economy Rate in Season:* {economy_in_season}")
